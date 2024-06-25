@@ -35,5 +35,7 @@ EXPOSE 8501
 WORKDIR /app
 COPY requirements.txt ./requirements.txt
 RUN pip3 install -r requirements.txt
+# Set environment variables
+ENV OPENAI_API_KEY=$OPENAI_API_KEY
 COPY . .
 CMD streamlit run app.py
