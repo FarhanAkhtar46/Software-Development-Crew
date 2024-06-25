@@ -8,8 +8,8 @@ from langchain_community.llms import Ollama
 
 
 class SoftwareDevelopmentAgents:
-    def __init__(self):
-        self.llm = Ollama(model=os.environ['MODEL'])
+    # def __init__(self):
+    #     self.llm = Ollama(model=os.environ['MODEL'])
 
     os.environ["OPENAI_MODEL_NAME"]="gpt-4o"
 
