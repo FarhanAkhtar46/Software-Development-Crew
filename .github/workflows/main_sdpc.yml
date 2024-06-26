@@ -32,7 +32,8 @@ jobs:
         push: true
         tags: sdpcrew.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_31ab9c8c970f431ca0fd208edbef5ee7 }}/crewai:${{ github.sha }}
         file: ./Dockerfile
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        build-args: |
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
   deploy:
     runs-on: ubuntu-latest
