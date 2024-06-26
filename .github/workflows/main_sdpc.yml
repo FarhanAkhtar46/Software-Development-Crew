@@ -34,6 +34,11 @@ jobs:
         file: ./Dockerfile
         build-args: |
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          env:
+          - name: OPENAI_API_KEY 
+          value: "${{ secrets.OPENAI_API_KEY }}"
+       
+      
 
   deploy:
     runs-on: ubuntu-latest
