@@ -12,7 +12,7 @@ class SoftwareDevelopmentAgents:
     #     self.llm = Ollama(model=os.environ['MODEL'])
 
     os.environ["OPENAI_MODEL_NAME"]="gpt-4o"
-    openai_api_key=os.getenv('OPENAI_API_KEY'))
+    openai_api_key=os.getenv('OPENAI_API_KEY')
 
     def project_manager_agent(self):
         return Agent(
