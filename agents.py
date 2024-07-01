@@ -52,7 +52,7 @@ class SoftwareDevelopmentAgents:
         return Agent(
             role="Software Developer",
             goal=dedent("""\
-                Develop the software solution and write code based on the provided input."""),
+                Provide required code for the software solution."""),
             backstory=dedent("""\
                 As the Software Developer, you are responsible for implementing the software
                 solution based on the architecture and SRS document."""),
@@ -68,7 +68,7 @@ class SoftwareDevelopmentAgents:
         return Agent(
             role="Tester",
             goal=dedent("""\
-                Perform unit testing on the provided solution and code."""),
+                Provide unit testing steps on the provided code by software developer."""),
             backstory=dedent("""\
                 As the Tester, you ensure the quality and functionality of the developed software
                 by performing thorough unit testing."""),
