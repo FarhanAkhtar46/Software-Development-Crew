@@ -5,13 +5,11 @@ from crewai import Agent
 # from tools.search_tools import SearchTools
 from langchain.llms import Ollama
 from langchain_community.llms import Ollama
-
+os.environ["OPENAI_MODEL_NAME"]="gpt-4o"
 
 class SoftwareDevelopmentAgents:
     # def __init__(self):
     #     self.llm = Ollama(model=os.environ['MODEL'])
-
-    model=os.environ["OPENAI_MODEL_NAME"]="gpt-4o"
     openai_api_key=os.getenv('OPENAI_API_KEY')
 
     def project_manager_agent(self):

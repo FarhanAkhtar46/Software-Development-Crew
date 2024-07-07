@@ -20,7 +20,7 @@ class SoftwareDevelopmentTasks:
  
     def architecture_design(self, agent, software_idea):
         return Task(description=dedent(f"""\
-            Design the system architecture and create flow diagrams for the software idea: {software_idea}.
+            Provide the system architecture and provide flow diagrams for the software idea: {software_idea}.
  
             The architecture should cover:
             - High-level design
@@ -36,7 +36,7 @@ class SoftwareDevelopmentTasks:
  
     def code_development(self, agent, software_idea):
         return Task(description=dedent(f"""\
-            Develop the software solution and write code based on the software idea: {software_idea}.
+            Provide the software solution with codebase and write code based on the software idea: {software_idea}.
  
             The development should include:
             - Implementing the architecture
@@ -58,10 +58,10 @@ class SoftwareDevelopmentTasks:
             - Edge cases
             - Performance tests
  
-            Provide steps for performing above testing on given development code.
+            Provide steps for performing above testing on given software idea.
             """),
             agent=agent,
-            expected_output="Steps for performing unit testing on given development code."
+            expected_output="Steps for performing unit testing on given software idea."
             
         )
  
