@@ -1,1 +1,79 @@
-The provided unit test suite comprehensively covers functional tests, edge cases, and performance tests for the login function. Use this test suite to ensure the quality and functionality of the developed login software.
+Steps for performing unit testing on the given software idea: School Management System
+
+### 1. Functional Tests
+Functional tests ensure that each function of the software operates in conformance with the requirement specification.
+
+#### 1.1 Student Management
+- **Add Student**
+  - Test adding a new student with valid data.
+  - Test adding a new student with missing mandatory fields.
+  - Test adding a new student with invalid data (e.g., alphabets in the Age field).
+- **Update Student**
+  - Test updating an existing student's details with valid data.
+  - Test updating an existing student's details with missing fields.
+  - Test updating an existing student's details with invalid data.
+- **Delete Student**
+  - Test deleting an existing student.
+  - Test deleting a student that does not exist.
+
+#### 1.2 Teacher Management
+- **Add Teacher**
+  - Test adding a new teacher with valid data.
+  - Test adding a new teacher with missing mandatory fields.
+  - Test adding a new teacher with invalid data.
+- **Update Teacher**
+  - Test updating an existing teacher's details with valid data.
+  - Test updating an existing teacher's details with missing fields.
+  - Test updating an existing teacher's details with invalid data.
+- **Delete Teacher**
+  - Test deleting an existing teacher.
+  - Test deleting a teacher that does not exist.
+
+#### 1.3 Class Management
+- **Create Class**
+  - Test creating a new class with valid data.
+  - Test creating a new class with missing fields.
+- **Assign Teacher to Class**
+  - Test assigning a teacher to a class with valid data.
+  - Test assigning a teacher to a class with invalid data or non-existing class/teacher.
+- **Enroll Student in Class**
+  - Test enrolling a student into a class with valid data.
+  - Test enrolling a student into a class with invalid data or non-existing class/student.
+
+### 2. Edge Cases
+Edge cases test the software's behavior at the extreme limits of input ranges.
+
+#### 2.1 Student Management
+- **Add Student**
+  - Test adding a student with maximum allowable characters in each field.
+  - Test adding a student with special characters in fields that allow text.
+  
+#### 2.2 Teacher Management
+- **Add Teacher**
+  - Test adding a teacher with maximum allowable characters in each field.
+  - Test adding a teacher with special characters in fields that allow text.
+
+#### 2.3 Class Management
+- **Create Class**
+  - Test creating a class at the maximum limit of the number of students.
+  - Test creating a class with special characters in the name field.
+
+### 3. Performance Tests
+Performance tests ensure the software performs well under expected workload.
+
+#### 3.1 Load Testing
+- **Student Management**
+  - Test the system's response time when adding, updating, and deleting a large number of students simultaneously.
+  
+- **Teacher Management**
+  - Test the system's response time when adding, updating, and deleting a large number of teachers simultaneously.
+
+- **Class Management**
+  - Test the system's response time when creating, updating, and deleting a large number of classes simultaneously.
+
+#### 3.2 Stress Testing
+- **System Overload**
+  - Test how the system behaves when the number of requests exceeds the expected load (e.g., 1000 students being added at the same time).
+  - Test the system's behavior under high memory usage conditions.
+
+By following these steps, you can perform comprehensive unit testing on the School Management System to ensure its functionality, robustness, and performance.
