@@ -1,21 +1,98 @@
-The system architecture for the login functionality includes the following components:
+**System Architecture Design for School Management System (SMS)**
 
-1. **High-Level Design:**
-   - Client Application: Interfaces (UI/UX), Input validation
-   - Authentication Server: User Authentication, Session Management, Security Measures
-   - Database: User Data Management, Credential Storage
-   - APIs: Authentication API, User Management API
+### 1. High-Level Design
+The School Management System (SMS) will have the following high-level components:
+1. **User Interface (UI)**: Web and mobile interfaces for students, teachers, administrators, and parents.
+2. **Authentication Service**: Handles user authentication and authorization.
+3. **Student Information System (SIS)**: Manages student records, grades, attendance, and schedules.
+4. **Course Management System (CMS)**: Manages course creation, enrollment, and materials distribution.
+5. **Communication Module**: Facilitates communication between users (messaging, notifications).
+6. **Reports and Analytics**: Generates reports and provides analytical insights.
+7. **Database**: Centralized storage for all data.
+8. **API Gateway**: Manages API requests and integration with third-party services.
+9. **Security Module**: Ensures data protection and compliance with regulations.
 
-2. **Component Diagrams:**
-   - Client Application: Login Form, Validation Module, API Client
-   - Authentication Server: Authentication Module, Session Manager, Security Module, Logging and Monitoring
-   - Database: User Table, Session Table, Logs Table
+### 2. Component Diagrams
+1. **User Interface (UI) Component Diagram**:
+   - Web Interface
+   - Mobile Interface
+   - Admin Dashboard
 
-3. **Sequence Diagrams:**
-   - User Login Sequence: Detailed step-by-step interactions between user, client application, authentication server, and database.
+2. **Authentication Service Component Diagram**:
+   - Login/Logout
+   - User Registration
+   - Role-Based Access Control
 
-4. **Data Flow Diagrams:**
-   - Level 0 DFD: High-level context diagram showing data flow between user, client application, authentication server, and database.
-   - Level 1 DFD: Detailed data flow including user input, data validation, authentication request, session management, and response handling.
+3. **Student Information System (SIS) Component Diagram**:
+   - Student Records
+   - Attendance Tracking
+   - Gradebook
+   - Scheduling
 
-This design is intended to be scalable and meet typical login functionality requirements. For a more tailored design, specific details from the SRS document are needed.
+4. **Course Management System (CMS) Component Diagram**:
+   - Course Creation
+   - Enrollment Management
+   - Content Delivery
+
+5. **Communication Module Component Diagram**:
+   - Messaging Service
+   - Notification Service
+
+6. **Reports and Analytics Component Diagram**:
+   - Report Generation
+   - Data Analytics
+
+7. **Database Component Diagram**:
+   - User Data
+   - Course Data
+   - Student Data
+   - Communication Logs
+
+8. **API Gateway Component Diagram**:
+   - Request Handling
+   - Third-Party Integration
+
+9. **Security Module Component Diagram**:
+   - Data Encryption
+   - Compliance Management
+
+### 3. Sequence Diagrams
+1. **User Login Sequence Diagram**:
+   - User -> UI: Enter credentials
+   - UI -> Authentication Service: Validate credentials
+   - Authentication Service -> Database: Fetch user data
+   - Authentication Service -> UI: Return authentication result
+
+2. **Course Enrollment Sequence Diagram**:
+   - User -> UI: Request course enrollment
+   - UI -> CMS: Validate enrollment request
+   - CMS -> Database: Update enrollment records
+   - CMS -> UI: Confirm enrollment
+
+3. **Grade Submission Sequence Diagram**:
+   - Teacher -> UI: Submit grades
+   - UI -> SIS: Validate and record grades
+   - SIS -> Database: Update grade records
+   - SIS -> UI: Confirm submission
+
+### 4. Data Flow Diagrams (DFDs)
+1. **Context Level DFD**:
+   - External Entities: Students, Teachers, Administrators, Parents
+   - Processes: User Management, Course Management, Communication, Reporting
+   - Data Stores: User Data, Course Data, Communication Logs
+
+2. **Level 1 DFD (User Management)**:
+   - Processes: User Registration, User Authentication, User Role Management
+   - Data Stores: User Data
+
+3. **Level 1 DFD (Course Management)**:
+   - Processes: Course Creation, Enrollment, Content Delivery
+   - Data Stores: Course Data, Enrollment Data
+
+4. **Level 1 DFD (Communication)**:
+   - Processes: Send Message, Receive Message, Send Notification
+   - Data Stores: Communication Logs
+
+5. **Level 1 DFD (Reporting)**:
+   - Processes: Generate Report, View Report
+   - Data Stores: User Data, Course Data, Attendance Data
