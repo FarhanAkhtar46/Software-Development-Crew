@@ -1,147 +1,154 @@
-Here is a comprehensive Software Requirements Specification (SRS) document for the software idea: login.
+# Software Requirements Specification (SRS) Document for School Management System
 
----
+## 1. Introduction
 
-### Software Requirements Specification (SRS) Document for Login System
+### 1.1 Purpose
+The purpose of this Software Requirements Specification (SRS) document is to provide a detailed description of the requirements for the School Management System. This document will cover the functional requirements, non-functional requirements, use cases, and user stories to guide the development process.
 
-#### 1. Introduction
+### 1.2 Scope
+The School Management System will be designed to manage various administrative and academic tasks such as student enrollment, attendance tracking, grade management, and communication between teachers, students, and parents.
 
-**1.1 Purpose**
-The purpose of this document is to provide a comprehensive Software Requirements Specification (SRS) for the development of a login system. This SRS will guide the development process ensuring that all functional and non-functional requirements are met, and use cases and user stories are thoroughly covered.
+### 1.3 Definitions, Acronyms, and Abbreviations
+- SMS: School Management System
+- SRS: Software Requirements Specification
+- UI: User Interface
+- CRUD: Create, Read, Update, Delete
 
-**1.2 Scope**
-The login system will allow users to securely access the application by providing authentication mechanisms. The system will support user registration, login, password recovery, and session management.
+### 1.4 References
+- IEEE SRS Template
 
-**1.3 Definitions, Acronyms, and Abbreviations**
-- **SRS**: Software Requirements Specification
-- **UI**: User Interface
-- **UX**: User Experience
-- **HTTP**: Hypertext Transfer Protocol
-- **HTTPS**: Secure Hypertext Transfer Protocol
-- **JWT**: JSON Web Token
-- **OTP**: One-Time Password
+## 2. Overall Description
 
-**1.4 References**
-- OWASP Authentication Cheat Sheet
-- NIST Digital Identity Guidelines
+### 2.1 Product Perspective
+The School Management System is a standalone application that will be deployed on the school's server and accessed by users through a web browser.
 
-#### 2. Overall Description
+### 2.2 Product Functions
+The main functions of the School Management System include:
+- Student Information Management
+- Attendance Tracking
+- Grade Management
+- Teacher Information Management
+- Parent-Teacher Communication
+- Event Management
+- Report Generation
 
-**2.1 Product Perspective**
-The login system is a standalone component that can be integrated into various applications to provide user authentication and session management. It will interact with a backend server for user data validation and session handling.
+### 2.3 User Classes and Characteristics
+- **Administrators:** Manage the overall system, including user accounts and system settings.
+- **Teachers:** Manage student grades, attendance, and communicate with parents.
+- **Students:** View grades, attendance records, and communicate with teachers.
+- **Parents:** View their child's grades, attendance, and communicate with teachers.
 
-**2.2 Product Functions**
-- User Registration
-- User Login
-- Password Recovery
-- Session Management
-- Logout
+### 2.4 Operating Environment
+The system will be web-based and must be compatible with major web browsers such as Google Chrome, Mozilla Firefox, and Microsoft Edge.
 
-**2.3 User Classes and Characteristics**
-- **End Users**: Individuals who will use the application and need to authenticate themselves.
-- **Administrators**: Personnel responsible for managing user accounts and handling security.
+### 2.5 Design and Implementation Constraints
+- The system should be developed using a scalable architecture to handle a large number of users.
+- Data privacy and security must be ensured.
 
-**2.4 Operating Environment**
-The system will operate in a web environment and will be compatible with major web browsers such as Google Chrome, Mozilla Firefox, and Microsoft Edge. It will utilize HTTPS for secure communication.
+### 2.6 Assumptions and Dependencies
+- Users have access to the internet and a web browser.
+- The server infrastructure is managed by the school.
 
-**2.5 Design and Implementation Constraints**
-- The system must comply with GDPR and other relevant data protection regulations.
-- The system should be scalable to handle a large number of concurrent users.
-- The system must ensure data integrity and confidentiality.
+## 3. Functional Requirements
 
-#### 3. Functional Requirements
+### 3.1 Student Information Management
+- The system shall allow administrators to add, edit, and delete student records.
+- The system shall allow teachers to view student profiles.
 
-**3.1 User Registration**
-- The system shall allow users to register by providing their email, username, and password.
-- The system shall validate the email format and check for the uniqueness of the username.
-- The system shall send a verification email to the user upon successful registration.
+### 3.2 Attendance Tracking
+- The system shall allow teachers to mark student attendance.
+- The system shall generate attendance reports.
 
-**3.2 User Login**
-- The system shall allow users to log in using their registered email/username and password.
-- The system shall validate user credentials against the stored data.
-- The system shall generate a JWT token upon successful login.
+### 3.3 Grade Management
+- The system shall allow teachers to enter and update student grades.
+- The system shall allow students and parents to view grades.
 
-**3.3 Password Recovery**
-- The system shall allow users to recover their password by providing their registered email.
-- The system shall send a password reset link to the provided email.
-- The system shall allow users to set a new password using the reset link.
+### 3.4 Teacher Information Management
+- The system shall allow administrators to add, edit, and delete teacher records.
+- The system shall allow teachers to update their profiles.
 
-**3.4 Session Management**
-- The system shall maintain user sessions using JWT tokens.
-- The system shall invalidate the JWT token upon user logout.
-- The system shall automatically invalidate expired JWT tokens.
+### 3.5 Parent-Teacher Communication
+- The system shall provide a messaging feature for parents and teachers to communicate.
+- The system shall notify users of new messages via email.
 
-**3.5 Logout**
-- The system shall allow users to log out and invalidate their session.
+### 3.6 Event Management
+- The system shall allow administrators to create and manage school events.
+- The system shall display upcoming events to all users.
 
-#### 4. Non-Functional Requirements
+### 3.7 Report Generation
+- The system shall generate various reports such as attendance reports, grade reports, and event reports.
 
-**4.1 Security**
-- The system shall use HTTPS for all communications.
-- The system shall encrypt user passwords using a secure hashing algorithm.
-- The system shall implement measures to prevent common security threats such as SQL injection, XSS, and CSRF.
+## 4. Non-Functional Requirements
 
-**4.2 Performance**
-- The system shall respond to user actions within 2 seconds.
-- The system shall handle up to 10,000 concurrent users without performance degradation.
+### 4.1 Performance Requirements
+- The system shall handle up to 1000 concurrent users.
+- The system shall load pages within 3 seconds.
 
-**4.3 Usability**
+### 4.2 Security Requirements
+- The system shall use HTTPS for secure communication.
+- The system shall require user authentication for access.
+
+### 4.3 Usability Requirements
 - The system shall have an intuitive and user-friendly interface.
-- The system shall provide clear error messages and guidance for user actions.
+- The system shall provide online help and documentation.
 
-**4.4 Reliability**
+### 4.4 Reliability Requirements
 - The system shall have an uptime of 99.9%.
-- The system shall have mechanisms for automatic recovery in case of failure.
+- The system shall provide data backup and recovery options.
 
-#### 5. Use Cases
+### 4.5 Maintainability Requirements
+- The system shall be modular to support easy maintenance and updates.
+- The system shall provide logging and monitoring features.
 
-**5.1 Use Case: User Registration**
-- **Actors**: End User
-- **Preconditions**: None
-- **Main Flow**:
-  1. User navigates to the registration page.
-  2. User fills in the registration form and submits it.
-  3. System validates the input data.
-  4. System stores the user data and sends a verification email.
-  5. User clicks the verification link in the email.
-  6. System verifies the email and activates the user account.
-- **Postconditions**: User account is created and activated.
+## 5. Use Cases
 
-**5.2 Use Case: User Login**
-- **Actors**: End User
-- **Preconditions**: User account is activated.
-- **Main Flow**:
-  1. User navigates to the login page.
-  2. User enters email/username and password.
-  3. System validates the credentials.
-  4. System generates a JWT token and logs in the user.
-- **Postconditions**: User is logged in and a session is created.
+### 5.1 Use Case: Manage Student Information
+- **Actor:** Administrator
+- **Description:** Administrator adds, edits, or deletes student records.
+- **Precondition:** Administrator is logged in.
+- **Steps:**
+  1. Administrator navigates to the student management page.
+  2. Administrator selects the action (add, edit, delete).
+  3. Administrator provides necessary information.
+  4. Administrator submits the form.
+- **Postcondition:** Student record is updated in the system.
 
-**5.3 Use Case: Password Recovery**
-- **Actors**: End User
-- **Preconditions**: User account exists.
-- **Main Flow**:
-  1. User navigates to the password recovery page.
-  2. User enters the registered email.
-  3. System sends a password reset link to the email.
-  4. User clicks the reset link and sets a new password.
-- **Postconditions**: User password is updated.
+### 5.2 Use Case: Mark Attendance
+- **Actor:** Teacher
+- **Description:** Teacher marks attendance for a class.
+- **Precondition:** Teacher is logged in.
+- **Steps:**
+  1. Teacher navigates to the attendance page.
+  2. Teacher selects the class and date.
+  3. Teacher marks attendance for each student.
+  4. Teacher submits the attendance.
+- **Postcondition:** Attendance record is updated in the system.
 
-**5.4 Use Case: Logout**
-- **Actors**: End User
-- **Preconditions**: User is logged in.
-- **Main Flow**:
-  1. User clicks the logout button.
-  2. System invalidates the JWT token and ends the session.
-- **Postconditions**: User is logged out.
+## 6. User Stories
 
-#### 6. User Stories
+### 6.1 User Story: As an Administrator
+- As an administrator, I want to manage student and teacher records so that I can keep the information up to date.
 
-**6.1 As a user, I want to register an account so that I can access the application.**
-**6.2 As a user, I want to log in to my account so that I can access my personal data.**
-**6.3 As a user, I want to recover my password so that I can regain access if I forget it.**
-**6.4 As a user, I want to log out of my account so that my session is secure.**
+### 6.2 User Story: As a Teacher
+- As a teacher, I want to mark attendance and update grades so that I can track student performance.
+
+### 6.3 User Story: As a Student
+- As a student, I want to view my grades and attendance records so that I can monitor my progress.
+
+### 6.4 User Story: As a Parent
+- As a parent, I want to communicate with teachers and view my child's performance so that I can stay informed about their education.
+
+## 7. Appendices
+
+### 7.1 Appendix A: Glossary
+- **Administrator:** A user who manages the system settings and user accounts.
+- **Teacher:** A user who manages student grades and attendance.
+- **Student:** A user who views their own grades and attendance.
+- **Parent:** A user who views their child's grades and attendance and communicates with teachers.
+
+### 7.2 Appendix B: References
+- IEEE SRS Template
 
 ---
 
-This SRS document provides a detailed guideline for the development of a login system, covering all necessary aspects to ensure a comprehensive and robust solution.
+This comprehensive SRS document provides a detailed description of the School Management System, covering all specified sections: functional requirements, non-functional requirements, use cases, and user stories.
