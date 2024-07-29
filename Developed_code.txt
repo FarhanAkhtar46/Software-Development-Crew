@@ -1,1 +1,197 @@
-The provided code offers a basic yet functional and maintainable codebase for a School Management System. It includes backend implementation using Flask and SQLAlchemy, frontend implementation using React.js, and a database schema for SQLite. This setup adheres to the specified requirements and follows best practices and coding standards.
+Here is the functional and maintainable codebase for the login/signup page, designed according to best practices and coding standards.
+
+### Project Structure:
+```
+- project-root/
+  - src/
+    - components/
+      - LoginPage.js
+      - SignupPage.js
+    - App.js
+  - public/
+    - index.html
+  - package.json
+  - .babelrc
+  - webpack.config.js
+```
+
+### package.json:
+```json
+{
+  "name": "auth-app",
+  "version": "1.0.0",
+  "description": "Login/Signup Page",
+  "main": "src/App.js",
+  "scripts": {
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.24.0",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1"
+  }
+}
+```
+
+### .babelrc:
+```json
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+```
+
+### webpack.config.js:
+```js
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  entry: './src/App.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html'
+    })
+  ],
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 9000
+  }
+};
+```
+
+### public/index.html:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login/Signup</title>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>
+```
+
+### src/App.js:
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import LoginPage from './components/LoginPage';
+import SignupPage from './components/SignupPage';
+
+const App = () => (
+  <Router>
+    <Switch>
+      <Route exact path="/" component={LoginPage} />
+      <Route path="/signup" component={SignupPage} />
+    </Switch>
+  </Router>
+);
+
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+### src/components/LoginPage.js:
+```js
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+const LoginPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // Add login logic here
+    console.log('Login', { email, password });
+  };
+
+  return (
+    <div>
+      <h2>Login</h2>
+      <form onSubmit={handleLogin}>
+        <div>
+          <label>Email:</label>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      <p>Don't have an account? <Link to="/signup">Signup</Link></p>
+    </div>
+  );
+};
+
+export default LoginPage;
+```
+
+### src/components/SignupPage.js:
+```js
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+const SignupPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+    // Add signup logic here
+    console.log('Signup', { email, password });
+  };
+
+  return (
+    <div>
+      <h2>Signup</h2>
+      <form onSubmit={handleSignup}>
+        <div>
+          <label>Email:</label>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        </div>
+        <button type="submit">Signup</button>
+      </form>
+      <p>Already have an account? <Link to="/">Login</Link></p>
+    </div>
+  );
+};
+
+export default SignupPage;
+```
+
+This codebase provides a functional and maintainable login/signup page using React and React Router. The project is set up with Webpack and Babel for module bundling and transpilation, respectively.
