@@ -1,98 +1,93 @@
-**System Architecture Design for School Management System (SMS)**
+### System Architecture Design for Login/Signup Page
 
-### 1. High-Level Design
-The School Management System (SMS) will have the following high-level components:
-1. **User Interface (UI)**: Web and mobile interfaces for students, teachers, administrators, and parents.
-2. **Authentication Service**: Handles user authentication and authorization.
-3. **Student Information System (SIS)**: Manages student records, grades, attendance, and schedules.
-4. **Course Management System (CMS)**: Manages course creation, enrollment, and materials distribution.
-5. **Communication Module**: Facilitates communication between users (messaging, notifications).
-6. **Reports and Analytics**: Generates reports and provides analytical insights.
-7. **Database**: Centralized storage for all data.
-8. **API Gateway**: Manages API requests and integration with third-party services.
-9. **Security Module**: Ensures data protection and compliance with regulations.
+#### 1. High-Level Design:
+The high-level design of the login/signup system includes the following components:
+- **Client-Side Application**: The frontend user interface where users interact with the system.
+- **API Gateway**: Acts as a reverse proxy to route requests from the client-side to the appropriate backend services.
+- **Authentication Service**: Responsible for handling login, signup, and token management.
+- **Database**: Stores user credentials, profile information, and other necessary data.
+- **Email Service**: Sends confirmation emails for account verification and password reset.
 
-### 2. Component Diagrams
-1. **User Interface (UI) Component Diagram**:
-   - Web Interface
-   - Mobile Interface
-   - Admin Dashboard
+#### 2. Component Diagram:
+The component diagram consists of the following components and their interactions:
 
-2. **Authentication Service Component Diagram**:
-   - Login/Logout
-   - User Registration
-   - Role-Based Access Control
+```
++---------------------------------+
+|           Client-Side           |
+|  - UI for Login/Signup          |
++---------------------------------+
+               |
+               v
++---------------------------------+
+|         API Gateway             |
+|  - Routes requests to services  |
++---------------------------------+
+               |
+               v
++---------------------------------+        +---------------------+
+|     Authentication Service      |<----->|       Database       |
+|  - Handles login/signup         |       |  - User credentials  |
+|  - Generates JWT tokens         |       |  - Profile info      |
++---------------------------------+        +---------------------+
+               |
+               v
++---------------------------------+
+|         Email Service           |
+|  - Sends confirmation emails    |
+|  - Sends password reset emails  |
++---------------------------------+
+```
 
-3. **Student Information System (SIS) Component Diagram**:
-   - Student Records
-   - Attendance Tracking
-   - Gradebook
-   - Scheduling
+#### 3. Sequence Diagram:
+The sequence diagrams for both login and signup processes are provided below.
 
-4. **Course Management System (CMS) Component Diagram**:
-   - Course Creation
-   - Enrollment Management
-   - Content Delivery
+**Login Sequence Diagram:**
+```
+Client-Side -> API Gateway: Submit login form (email & password)
+API Gateway -> Authentication Service: Forward login request
+Authentication Service -> Database: Verify credentials
+Database -> Authentication Service: Credentials valid/invalid
+Authentication Service -> API Gateway: Return JWT token or error
+API Gateway -> Client-Side: Return JWT token or error
+```
 
-5. **Communication Module Component Diagram**:
-   - Messaging Service
-   - Notification Service
+**Signup Sequence Diagram:**
+```
+Client-Side -> API Gateway: Submit signup form (email, password, etc.)
+API Gateway -> Authentication Service: Forward signup request
+Authentication Service -> Database: Store user data
+Database -> Authentication Service: User data stored
+Authentication Service -> Email Service: Send confirmation email
+Email Service -> Client-Side: Confirmation email sent
+Authentication Service -> API Gateway: Return success message
+API Gateway -> Client-Side: Return success message
+```
 
-6. **Reports and Analytics Component Diagram**:
-   - Report Generation
-   - Data Analytics
+#### 4. Data Flow Diagram:
+The data flow diagram outlines the flow of data within the system for both login and signup processes.
 
-7. **Database Component Diagram**:
-   - User Data
-   - Course Data
-   - Student Data
-   - Communication Logs
+**Login Data Flow Diagram:**
+```
+User (email, password) --> [Client-Side]
+[Client-Side] --> [API Gateway]
+[API Gateway] --> [Authentication Service]
+[Authentication Service] --> [Database] (Verify credentials)
+[Database] --> [Authentication Service] (Credentials valid/invalid)
+[Authentication Service] --> [API Gateway] (JWT token or error)
+[API Gateway] --> [Client-Side] (JWT token or error)
+```
 
-8. **API Gateway Component Diagram**:
-   - Request Handling
-   - Third-Party Integration
+**Signup Data Flow Diagram:**
+```
+User (email, password, etc.) --> [Client-Side]
+[Client-Side] --> [API Gateway]
+[API Gateway] --> [Authentication Service]
+[Authentication Service] --> [Database] (Store user data)
+[Database] --> [Authentication Service] (User data stored)
+[Authentication Service] --> [Email Service] (Send confirmation email)
+[Email Service] --> [Client-Side] (Confirmation email sent)
+[Authentication Service] --> [API Gateway] (Success message)
+[API Gateway] --> [Client-Side] (Success message)
+```
 
-9. **Security Module Component Diagram**:
-   - Data Encryption
-   - Compliance Management
-
-### 3. Sequence Diagrams
-1. **User Login Sequence Diagram**:
-   - User -> UI: Enter credentials
-   - UI -> Authentication Service: Validate credentials
-   - Authentication Service -> Database: Fetch user data
-   - Authentication Service -> UI: Return authentication result
-
-2. **Course Enrollment Sequence Diagram**:
-   - User -> UI: Request course enrollment
-   - UI -> CMS: Validate enrollment request
-   - CMS -> Database: Update enrollment records
-   - CMS -> UI: Confirm enrollment
-
-3. **Grade Submission Sequence Diagram**:
-   - Teacher -> UI: Submit grades
-   - UI -> SIS: Validate and record grades
-   - SIS -> Database: Update grade records
-   - SIS -> UI: Confirm submission
-
-### 4. Data Flow Diagrams (DFDs)
-1. **Context Level DFD**:
-   - External Entities: Students, Teachers, Administrators, Parents
-   - Processes: User Management, Course Management, Communication, Reporting
-   - Data Stores: User Data, Course Data, Communication Logs
-
-2. **Level 1 DFD (User Management)**:
-   - Processes: User Registration, User Authentication, User Role Management
-   - Data Stores: User Data
-
-3. **Level 1 DFD (Course Management)**:
-   - Processes: Course Creation, Enrollment, Content Delivery
-   - Data Stores: Course Data, Enrollment Data
-
-4. **Level 1 DFD (Communication)**:
-   - Processes: Send Message, Receive Message, Send Notification
-   - Data Stores: Communication Logs
-
-5. **Level 1 DFD (Reporting)**:
-   - Processes: Generate Report, View Report
-   - Data Stores: User Data, Course Data, Attendance Data
+This design ensures that the system is scalable, secure, and meets the requirements as outlined in the SRS document.
