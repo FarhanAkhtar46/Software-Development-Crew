@@ -1,58 +1,86 @@
-Steps for performing unit testing on the login/signup page:
+### Steps for Performing Unit Testing on Login/Signup Page
 
-### Functional Tests:
-1. **Test User Login:**
-   - Verify that users can log in with valid credentials.
-   - Check that users cannot log in with invalid credentials (incorrect username or password).
-   - Verify that users are redirected to the correct page after a successful login.
-   - Ensure that the "Remember Me" functionality correctly saves the login session.
+#### 1. Functional Tests
 
-2. **Test User Signup:**
-   - Verify that users can successfully create a new account with valid details.
-   - Check that users cannot create an account with invalid details (e.g., invalid email format, password too short).
-   - Ensure that the user receives a confirmation email upon successful registration.
-   - Verify that the user is redirected to the login page or a welcome page after successful signup.
+1. **Test Case: Valid Login**
+   - **Step 1:** Enter a valid username.
+   - **Step 2:** Enter a valid password.
+   - **Step 3:** Click on the login button.
+   - **Expected Result:** User should be logged in and redirected to the dashboard.
 
-3. **Password Recovery:**
-   - Verify that users can initiate password recovery by entering their email.
-   - Check that users receive a password recovery email and can follow the link to reset their password.
-   - Ensure that the new password is accepted and the user can use it to log in.
+2. **Test Case: Invalid Login**
+   - **Step 1:** Enter an invalid username.
+   - **Step 2:** Enter an incorrect password.
+   - **Step 3:** Click on the login button.
+   - **Expected Result:** An error message should be displayed.
 
-4. **Field Validations:**
-   - Ensure that all required fields (username, email, password) are validated.
-   - Verify that appropriate error messages are shown for empty or invalid fields.
+3. **Test Case: Valid Signup**
+   - **Step 1:** Enter a valid username.
+   - **Step 2:** Enter a valid and unique email address.
+   - **Step 3:** Enter a strong password.
+   - **Step 4:** Confirm the password.
+   - **Step 5:** Click on the signup button.
+   - **Expected Result:** User should be signed up and receive a confirmation email.
 
-### Edge Cases:
-1. **SQL Injection:**
-   - Test for SQL injection vulnerabilities by inputting SQL commands in the username and password fields.
-   - Ensure the application handles such inputs securely and does not expose any data.
+4. **Test Case: Duplicate Signup**
+   - **Step 1:** Enter a username that already exists.
+   - **Step 2:** Enter an email that is already registered.
+   - **Step 3:** Enter a password.
+   - **Step 4:** Confirm the password.
+   - **Step 5:** Click on the signup button.
+   - **Expected Result:** An error message should be displayed indicating that the username or email is already taken.
 
-2. **Cross-Site Scripting (XSS):**
-   - Test for XSS vulnerabilities by inputting scripts into the username, email, and password fields.
-   - Verify that the application sanitizes inputs and does not execute any scripts.
+5. **Test Case: Password Recovery**
+   - **Step 1:** Click on the "Forgot Password" link.
+   - **Step 2:** Enter the registered email address.
+   - **Step 3:** Click on the "Submit" button.
+   - **Expected Result:** A password recovery email should be sent to the given email address.
 
-3. **Boundary Value Analysis:**
-   - Test the username and password fields with minimum and maximum length inputs.
-   - Verify that the application handles inputs at the boundary conditions correctly.
+#### 2. Edge Cases
 
-4. **Concurrent Logins:**
-   - Ensure that multiple logins from different devices or browsers with the same account are handled appropriately.
+1. **Test Case: Empty Fields Login**
+   - **Step 1:** Leave the username and password fields empty.
+   - **Step 2:** Click on the login button.
+   - **Expected Result:** An error message should be displayed indicating that both fields are required.
 
-### Performance Tests:
-1. **Response Time:**
-   - Measure the time it takes for the login and signup requests to be processed and the user to be redirected.
-   - Ensure that the response time is within acceptable limits.
+2. **Test Case: Invalid Email Format Signup**
+   - **Step 1:** Enter a valid username.
+   - **Step 2:** Enter an invalid email format (e.g., "user@domain").
+   - **Step 3:** Enter a password.
+   - **Step 4:** Confirm the password.
+   - **Step 5:** Click on the signup button.
+   - **Expected Result:** An error message should be displayed indicating that the email format is invalid.
 
-2. **Load Testing:**
-   - Simulate multiple users trying to log in and sign up at the same time.
-   - Verify that the application can handle concurrent logins and signups without crashing or slowing down significantly.
+3. **Test Case: SQL Injection**
+   - **Step 1:** Enter a username with an SQL injection string (e.g., "admin' OR 1=1; --").
+   - **Step 2:** Enter a random password.
+   - **Step 3:** Click on the login button.
+   - **Expected Result:** The system should prevent the SQL injection and display an error message.
 
-3. **Stress Testing:**
-   - Gradually increase the load on the login/signup page to identify the breaking point.
-   - Ensure the system can recover gracefully from high stress conditions.
+4. **Test Case: XSS Attack**
+   - **Step 1:** Enter a username with a script tag (e.g., "<script>alert('XSS');</script>").
+   - **Step 2:** Enter a random password.
+   - **Step 3:** Click on the login button.
+   - **Expected Result:** The system should prevent the XSS attack and display an error message.
 
-4. **Database Performance:**
-   - Monitor the performance of the database during login and signup operations.
-   - Ensure the database queries are optimized and do not cause significant delays.
+#### 3. Performance Tests
 
-By performing these tests, you can ensure the quality, functionality, and performance of the login/signup page.
+1. **Test Case: Login Response Time**
+   - **Step 1:** Enter a valid username.
+   - **Step 2:** Enter a valid password.
+   - **Step 3:** Click on the login button.
+   - **Expected Result:** Measure the time taken for the login process to complete and ensure it is within acceptable limits (e.g., less than 2 seconds).
+
+2. **Test Case: Signup Response Time**
+   - **Step 1:** Enter a valid username.
+   - **Step 2:** Enter a valid and unique email address.
+   - **Step 3:** Enter a strong password.
+   - **Step 4:** Confirm the password.
+   - **Step 5:** Click on the signup button.
+   - **Expected Result:** Measure the time taken for the signup process to complete and ensure it is within acceptable limits (e.g., less than 3 seconds).
+
+3. **Test Case: Load Testing**
+   - **Step 1:** Simulate multiple users (e.g., 1000 users) trying to login/signup simultaneously.
+   - **Expected Result:** The system should handle the load without crashing, and response times should remain within acceptable limits.
+
+By following these steps, you can ensure that the login/signup page is thoroughly tested for functionality, edge cases, and performance.
