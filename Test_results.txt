@@ -1,63 +1,91 @@
-Steps for performing unit testing on the school management system:
+### Steps for Performing Unit Testing on School Management System
 
-### Functional Tests
-1. **Student Enrollment Module**
-   - Test case: Ensure that new students can be enrolled.
-     - Input: Student details (name, age, grade, etc.).
-     - Expected Output: Student is successfully added to the database.
-   - Test case: Ensure that an error is shown if required fields are missing.
-     - Input: Incomplete student details.
-     - Expected Output: Error message indicating missing fields.
+#### 1. **Functional Tests**
 
-2. **Teacher Assignment Module**
-   - Test case: Assign a teacher to a class.
-     - Input: Teacher ID, Class ID.
-     - Expected Output: Teacher is successfully assigned to the class.
-   - Test case: Ensure that an error is shown if the teacher is already assigned to another class at the same time.
-     - Input: Teacher ID, conflicting Class ID.
-     - Expected Output: Error message indicating scheduling conflict.
+Functional tests ensure that each function of the software application operates in conformance with the requirement specification.
 
-3. **Class Schedule Module**
-   - Test case: Create a new class schedule.
-     - Input: Class details (time, subject, teacher).
-     - Expected Output: Schedule is successfully created.
-   - Test case: Ensure that an error is shown if the classroom is already booked.
-     - Input: Conflicting class schedule details.
-     - Expected Output: Error message indicating classroom booking conflict.
+1. **User Authentication Module:**
+   - Test valid login with correct username and password.
+   - Test invalid login with incorrect username and password.
+   - Test password reset functionality.
 
-### Edge Cases
-1. **Student Enrollment Edge Cases**
-   - Test case: Enroll a student with special characters in the name.
-     - Input: Name with special characters.
-     - Expected Output: Either successful enrollment or error message indicating invalid characters.
-   - Test case: Enroll a student with age below the minimum required.
-     - Input: Age below the minimum threshold.
-     - Expected Output: Error message indicating age requirement.
+2. **Student Management Module:**
+   - Test adding a new student record.
+   - Test editing an existing student record.
+   - Test deleting a student record.
+   - Test retrieving a student record by ID.
 
-2. **Teacher Assignment Edge Cases**
-   - Test case: Assign a teacher who is already teaching maximum allowed classes.
-     - Input: Teacher ID, new Class ID.
-     - Expected Output: Error message indicating maximum class limit reached.
+3. **Teacher Management Module:**
+   - Test adding a new teacher record.
+   - Test editing an existing teacher record.
+   - Test deleting a teacher record.
+   - Test retrieving a teacher record by ID.
 
-3. **Class Schedule Edge Cases**
-   - Test case: Schedule a class at an unusual time (e.g., midnight).
-     - Input: Class details with unusual time.
-     - Expected Output: Either successful scheduling or error message indicating invalid time.
+4. **Class Management Module:**
+   - Test creating a new class.
+   - Test assigning students to a class.
+   - Test assigning teachers to a class.
+   - Test updating class information.
 
-### Performance Tests
-1. **Student Enrollment Performance**
-   - Test case: Enroll a large number of students in bulk.
-     - Input: Bulk student details.
-     - Expected Output: System handles the bulk enrollment without crashing and within acceptable time limits.
+5. **Attendance Module:**
+   - Test marking attendance for students.
+   - Test viewing attendance records.
+   - Test generating attendance reports.
 
-2. **Database Query Performance**
-   - Test case: Retrieve student records from a large dataset.
-     - Input: Query to retrieve student records.
-     - Expected Output: Query executes within acceptable performance limits.
+6. **Grade Management Module:**
+   - Test entering grades for students.
+   - Test updating grades.
+   - Test viewing grades.
+   - Test generating grade reports.
 
-3. **Class Schedule Performance**
-   - Test case: Generate class schedules for all classes for an entire academic year.
-     - Input: Details for generating schedules.
-     - Expected Output: Schedules are generated within acceptable time limits without performance degradation.
+#### 2. **Edge Cases**
 
-These steps ensure that the school management system is thoroughly tested for functionality, edge cases, and performance, ensuring a robust and reliable software solution.
+Edge cases are scenarios that occur at the extreme ends of input ranges.
+
+1. **User Authentication Module:**
+   - Test login with an empty username and password.
+   - Test login with extremely long username and password.
+   - Test the system’s response to SQL injection attempts.
+
+2. **Student Management Module:**
+   - Test adding a student with maximum allowed characters in each field.
+   - Test adding a student with special characters in name fields.
+   - Test the system behavior when attempting to delete a non-existent student record.
+
+3. **Teacher Management Module:**
+   - Test adding a teacher with maximum allowed characters in each field.
+   - Test adding a teacher with special characters in name fields.
+   - Test the system behavior when attempting to delete a non-existent teacher record.
+
+4. **Class Management Module:**
+   - Test creating a class with a maximum number of students.
+   - Test creating a class with special characters in the class name.
+   - Test the system behavior when attempting to update a non-existent class.
+
+5. **Attendance Module:**
+   - Test marking attendance for a class with no students.
+   - Test viewing attendance records when there are none.
+   - Test generating attendance reports for a future date.
+
+6. **Grade Management Module:**
+   - Test entering grades with maximum allowed characters.
+   - Test entering invalid grade formats (e.g., letters instead of numbers).
+   - Test generating grade reports for a non-existent student.
+
+#### 3. **Performance Tests**
+
+Performance tests ensure the software application performs well under expected workloads.
+
+1. **Load Testing:**
+   - Test the system's behavior under peak load conditions, such as the start of a new school term when many users log in simultaneously.
+   - Test the system's performance when retrieving a large number of student records.
+
+2. **Stress Testing:**
+   - Test the system's behavior under extreme stress, such as attempting to log in with thousands of simultaneous users.
+   - Test the system's response time when generating large reports (e.g., attendance and grade reports for an entire year).
+
+3. **Scalability Testing:**
+   - Test adding a large number of student and teacher records to evaluate the system’s scalability.
+   - Test the system's performance when scaling up the number of classes and associated data.
+
+By following these steps, you can ensure thorough unit testing for the school management system, covering functional tests, edge cases, and performance tests.
