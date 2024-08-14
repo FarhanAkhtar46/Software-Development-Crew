@@ -1,147 +1,134 @@
-Comprehensive Software Requirements Specification (SRS) document for the login/signup page
+Comprehensive Software Requirements Specification (SRS) document for the School Management System:
 
 ---
-# Software Requirements Specification (SRS) Document
+
+# Software Requirements Specification (SRS)
 
 ## 1. Introduction
-
 ### 1.1 Purpose
-The purpose of this document is to provide a detailed Software Requirements Specification (SRS) for the development of a login/signup page. This document includes functional requirements, non-functional requirements, use cases, and user stories that will guide the development process.
+The purpose of this document is to provide a detailed Software Requirements Specification (SRS) for the School Management System. This document will guide the development process and ensure that the final product meets the needs of all stakeholders.
 
 ### 1.2 Scope
-The login/signup page will be a web-based interface that allows users to create new accounts (signup) and access their existing accounts (login). The system will support different roles such as general users and administrators.
+The School Management System is designed to streamline the management of school operations, including student and staff information, class schedules, attendance, reporting, and communication. The system will be used by administrators, teachers, students, and parents.
 
 ### 1.3 Definitions, Acronyms, and Abbreviations
-- SRS: Software Requirements Specification
-- UI: User Interface
-- UX: User Experience
+- **SRS**: Software Requirements Specification
+- **MFA**: Multi-Factor Authentication
+- **SMS**: School Management System
 
 ### 1.4 References
-- Web Security Guidelines
-- User Interface Design Guidelines
-- GDPR Compliance Documentation
+- IEEE Std 830-1998, IEEE Recommended Practice for Software Requirements Specifications
+
+### 1.5 Overview
+This document includes the functional and non-functional requirements, use cases, and user stories for the School Management System.
 
 ## 2. Overall Description
-
 ### 2.1 Product Perspective
-The login/signup page is a standalone module that will be integrated into a larger web application. It will serve as the entry point for users to access additional features of the application.
+The School Management System is a standalone product that interacts with existing school infrastructure and databases. It provides a user-friendly interface for managing school operations.
 
 ### 2.2 Product Functions
-- User Registration
-- User Login
-- Password Recovery
-- Account Verification
+- User Management
+- Student and Staff Information Management
+- Class Schedule Management
+- Attendance Management
+- Reporting
+- Communication
 
 ### 2.3 User Classes and Characteristics
-- General Users: Individuals who use the application for its intended purpose.
-- Administrators: Users with elevated privileges for managing application settings and user accounts.
+- **Administrators**: Manage the overall system and user roles.
+- **Teachers**: Manage class schedules, attendance, and communication with students and parents.
+- **Students**: Access class schedules, attendance records, and communicate with teachers.
+- **Parents**: View their child's academic performance and communicate with teachers.
 
 ### 2.4 Operating Environment
-- Web Browsers: Chrome, Firefox, Safari, Edge
-- Platforms: Windows, macOS, Linux
+- Web-based application accessible via modern browsers.
+- Mobile application for iOS and Android devices.
 
-### 2.5 Design and Implementation Constraints
-- Must comply with GDPR regulations.
-- Must follow OWASP security guidelines.
-
-### 2.6 User Documentation
-- User Guide
-- FAQ Section
-
-### 2.7 Assumptions and Dependencies
-- Email service for account verification and password recovery.
-- Database system for storing user information.
+### 2.5 Constraints
+- Must comply with data privacy regulations.
+- Must support Microsoft MFA for user authentication.
 
 ## 3. Functional Requirements
+### 3.1 User Management
+- **FR1**: The system shall allow administrators to create, read, update, and delete user accounts.
+- **FR2**: The system shall support role-based access control.
 
-### 3.1 User Registration
-- The system shall allow users to create a new account by providing a username, email, and password.
-- The system shall send a verification email to the user upon registration.
-- The system shall confirm the user's email upon clicking the verification link.
+### 3.2 Student and Staff Information Management
+- **FR3**: The system shall allow administrators to manage student and staff profiles.
+- **FR4**: The system shall enable teachers to update student grades and performance records.
 
-### 3.2 User Login
-- The system shall allow users to login using their email and password.
-- The system shall restrict access to users with unverified email addresses.
-- The system shall allow users to remain logged in across sessions.
+### 3.3 Class Schedule Management
+- **FR5**: The system shall allow administrators to create and manage class schedules.
+- **FR6**: The system shall enable teachers to view and update their class schedules.
 
-### 3.3 Password Recovery
-- The system shall provide a "Forgot Password" feature.
-- The system shall send a password reset link to the user's email.
-- The system shall allow users to set a new password via the reset link.
+### 3.4 Attendance Management
+- **FR7**: The system shall allow teachers to record student attendance.
+- **FR8**: The system shall generate attendance reports.
 
-### 3.4 Account Verification
-- The system shall verify user accounts via a unique token sent to the user's email.
-- The system shall notify the user if their account is already verified.
+### 3.5 Reporting
+- **FR9**: The system shall generate academic performance reports.
+- **FR10**: The system shall provide customizable report templates.
+
+### 3.6 Communication
+- **FR11**: The system shall enable communication between teachers, students, and parents.
+- **FR12**: The system shall provide notifications for important events and updates.
 
 ## 4. Non-Functional Requirements
+### 4.1 Performance
+- **NFR1**: The system shall support up to 1000 concurrent users without performance degradation.
 
-### 4.1 Security
-- The system shall encrypt all sensitive data such as passwords.
-- The system shall implement measures to prevent SQL injection and XSS attacks.
-
-### 4.2 Performance
-- The system shall respond to user actions within 2 seconds under normal load conditions.
-- The system shall support up to 10,000 concurrent users.
+### 4.2 Security
+- **NFR2**: The system shall implement Microsoft MFA for user authentication.
+- **NFR3**: The system shall encrypt sensitive data at rest and in transit.
 
 ### 4.3 Usability
-- The system shall provide a user-friendly interface.
-- The system shall be accessible to users with disabilities.
+- **NFR4**: The system shall have an intuitive user interface accessible to all user roles.
 
 ### 4.4 Reliability
-- The system shall have an uptime of 99.9%.
-- The system shall recover from crashes within 5 minutes.
+- **NFR5**: The system shall have a 99.9% uptime availability.
 
-### 4.5 Maintainability
-- The system code shall be documented and adhere to coding standards.
-- The system shall support easy updates and patches.
+### 4.5 Scalability
+- **NFR6**: The system shall be scalable to support the growing number of users and data.
+
+### 4.6 Maintainability
+- **NFR7**: The system shall be designed to facilitate easy updates and maintenance.
 
 ## 5. Use Cases
+### 5.1 Use Case 1: User Login
+- **Actors**: All user roles
+- **Preconditions**: User has a valid account and Microsoft MFA is configured.
+- **Main Flow**:
+  1. User enters username and password.
+  2. System prompts for MFA verification.
+  3. User completes MFA verification.
+  4. System grants access to the user.
 
-### 5.1 Use Case: User Registration
-**Actors:** General User  
-**Description:** The user registers for a new account.  
-**Preconditions:** The user is on the registration page.  
-**Postconditions:** The user receives a verification email.  
-**Normal Flow:**
-1. User navigates to the registration page.
-2. User enters required information (username, email, password).
-3. User submits the registration form.
-4. System sends a verification email to the user.
-
-### 5.2 Use Case: User Login
-**Actors:** General User  
-**Description:** The user logs into their account.  
-**Preconditions:** The user has an existing account.  
-**Postconditions:** The user is logged into the system.  
-**Normal Flow:**
-1. User navigates to the login page.
-2. User enters email and password.
-3. User submits the login form.
-4. System verifies credentials and logs the user in.
+### 5.2 Use Case 2: Manage Student Information
+- **Actors**: Administrators, Teachers
+- **Preconditions**: User is logged in with appropriate role.
+- **Main Flow**:
+  1. User navigates to the student management section.
+  2. User adds/updates/deletes student information.
+  3. System saves the changes and updates the database.
 
 ## 6. User Stories
+### 6.1 Administrator User Stories
+- **As an administrator, I want to create user accounts, so that new users can access the system.**
+- **As an administrator, I want to manage class schedules, so that classes are organized efficiently.**
 
-### 6.1 User Story: As a user, I want to register for a new account so that I can access the application.
-**Acceptance Criteria:**
-- The registration form requires a username, email, and password.
-- A verification email is sent upon successful registration.
+### 6.2 Teacher User Stories
+- **As a teacher, I want to record student attendance, so that I can track student participation.**
+- **As a teacher, I want to update student grades, so that academic performance is accurately recorded.**
 
-### 6.2 User Story: As a user, I want to log into my account so that I can use the application.
-**Acceptance Criteria:**
-- The login form requires an email and password.
-- Users with unverified email addresses cannot log in.
+### 6.3 Student User Stories
+- **As a student, I want to view my class schedule, so that I know when and where my classes are.**
+- **As a student, I want to communicate with my teachers, so that I can ask questions and get help.**
 
-### 6.3 User Story: As a user, I want to recover my password if I forget it, so that I can regain access to my account.
-**Acceptance Criteria:**
-- A "Forgot Password" link is available on the login page.
-- A password reset email is sent to the user's email address.
-
-### 6.4 User Story: As an administrator, I want to manage user accounts so that I can maintain the system.
-**Acceptance Criteria:**
-- Administrators can view and edit user account details.
-- Administrators can deactivate or delete user accounts.
+### 6.4 Parent User Stories
+- **As a parent, I want to view my child's academic performance, so that I can monitor their progress.**
+- **As a parent, I want to communicate with teachers, so that I can discuss my child's education.**
 
 ---
 
-This document is intended to be a comprehensive guide for the development of the login/signup page, ensuring that all functional and non-functional requirements are met.
+This comprehensive SRS document covers all the specified sections for the School Management System.
 ```
