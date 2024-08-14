@@ -1,86 +1,63 @@
-### Steps for Performing Unit Testing on Login/Signup Page
+Steps for performing unit testing on the school management system:
 
-#### 1. Functional Tests
+### Functional Tests
+1. **Student Enrollment Module**
+   - Test case: Ensure that new students can be enrolled.
+     - Input: Student details (name, age, grade, etc.).
+     - Expected Output: Student is successfully added to the database.
+   - Test case: Ensure that an error is shown if required fields are missing.
+     - Input: Incomplete student details.
+     - Expected Output: Error message indicating missing fields.
 
-1. **Test Case: Valid Login**
-   - **Step 1:** Enter a valid username.
-   - **Step 2:** Enter a valid password.
-   - **Step 3:** Click on the login button.
-   - **Expected Result:** User should be logged in and redirected to the dashboard.
+2. **Teacher Assignment Module**
+   - Test case: Assign a teacher to a class.
+     - Input: Teacher ID, Class ID.
+     - Expected Output: Teacher is successfully assigned to the class.
+   - Test case: Ensure that an error is shown if the teacher is already assigned to another class at the same time.
+     - Input: Teacher ID, conflicting Class ID.
+     - Expected Output: Error message indicating scheduling conflict.
 
-2. **Test Case: Invalid Login**
-   - **Step 1:** Enter an invalid username.
-   - **Step 2:** Enter an incorrect password.
-   - **Step 3:** Click on the login button.
-   - **Expected Result:** An error message should be displayed.
+3. **Class Schedule Module**
+   - Test case: Create a new class schedule.
+     - Input: Class details (time, subject, teacher).
+     - Expected Output: Schedule is successfully created.
+   - Test case: Ensure that an error is shown if the classroom is already booked.
+     - Input: Conflicting class schedule details.
+     - Expected Output: Error message indicating classroom booking conflict.
 
-3. **Test Case: Valid Signup**
-   - **Step 1:** Enter a valid username.
-   - **Step 2:** Enter a valid and unique email address.
-   - **Step 3:** Enter a strong password.
-   - **Step 4:** Confirm the password.
-   - **Step 5:** Click on the signup button.
-   - **Expected Result:** User should be signed up and receive a confirmation email.
+### Edge Cases
+1. **Student Enrollment Edge Cases**
+   - Test case: Enroll a student with special characters in the name.
+     - Input: Name with special characters.
+     - Expected Output: Either successful enrollment or error message indicating invalid characters.
+   - Test case: Enroll a student with age below the minimum required.
+     - Input: Age below the minimum threshold.
+     - Expected Output: Error message indicating age requirement.
 
-4. **Test Case: Duplicate Signup**
-   - **Step 1:** Enter a username that already exists.
-   - **Step 2:** Enter an email that is already registered.
-   - **Step 3:** Enter a password.
-   - **Step 4:** Confirm the password.
-   - **Step 5:** Click on the signup button.
-   - **Expected Result:** An error message should be displayed indicating that the username or email is already taken.
+2. **Teacher Assignment Edge Cases**
+   - Test case: Assign a teacher who is already teaching maximum allowed classes.
+     - Input: Teacher ID, new Class ID.
+     - Expected Output: Error message indicating maximum class limit reached.
 
-5. **Test Case: Password Recovery**
-   - **Step 1:** Click on the "Forgot Password" link.
-   - **Step 2:** Enter the registered email address.
-   - **Step 3:** Click on the "Submit" button.
-   - **Expected Result:** A password recovery email should be sent to the given email address.
+3. **Class Schedule Edge Cases**
+   - Test case: Schedule a class at an unusual time (e.g., midnight).
+     - Input: Class details with unusual time.
+     - Expected Output: Either successful scheduling or error message indicating invalid time.
 
-#### 2. Edge Cases
+### Performance Tests
+1. **Student Enrollment Performance**
+   - Test case: Enroll a large number of students in bulk.
+     - Input: Bulk student details.
+     - Expected Output: System handles the bulk enrollment without crashing and within acceptable time limits.
 
-1. **Test Case: Empty Fields Login**
-   - **Step 1:** Leave the username and password fields empty.
-   - **Step 2:** Click on the login button.
-   - **Expected Result:** An error message should be displayed indicating that both fields are required.
+2. **Database Query Performance**
+   - Test case: Retrieve student records from a large dataset.
+     - Input: Query to retrieve student records.
+     - Expected Output: Query executes within acceptable performance limits.
 
-2. **Test Case: Invalid Email Format Signup**
-   - **Step 1:** Enter a valid username.
-   - **Step 2:** Enter an invalid email format (e.g., "user@domain").
-   - **Step 3:** Enter a password.
-   - **Step 4:** Confirm the password.
-   - **Step 5:** Click on the signup button.
-   - **Expected Result:** An error message should be displayed indicating that the email format is invalid.
+3. **Class Schedule Performance**
+   - Test case: Generate class schedules for all classes for an entire academic year.
+     - Input: Details for generating schedules.
+     - Expected Output: Schedules are generated within acceptable time limits without performance degradation.
 
-3. **Test Case: SQL Injection**
-   - **Step 1:** Enter a username with an SQL injection string (e.g., "admin' OR 1=1; --").
-   - **Step 2:** Enter a random password.
-   - **Step 3:** Click on the login button.
-   - **Expected Result:** The system should prevent the SQL injection and display an error message.
-
-4. **Test Case: XSS Attack**
-   - **Step 1:** Enter a username with a script tag (e.g., "<script>alert('XSS');</script>").
-   - **Step 2:** Enter a random password.
-   - **Step 3:** Click on the login button.
-   - **Expected Result:** The system should prevent the XSS attack and display an error message.
-
-#### 3. Performance Tests
-
-1. **Test Case: Login Response Time**
-   - **Step 1:** Enter a valid username.
-   - **Step 2:** Enter a valid password.
-   - **Step 3:** Click on the login button.
-   - **Expected Result:** Measure the time taken for the login process to complete and ensure it is within acceptable limits (e.g., less than 2 seconds).
-
-2. **Test Case: Signup Response Time**
-   - **Step 1:** Enter a valid username.
-   - **Step 2:** Enter a valid and unique email address.
-   - **Step 3:** Enter a strong password.
-   - **Step 4:** Confirm the password.
-   - **Step 5:** Click on the signup button.
-   - **Expected Result:** Measure the time taken for the signup process to complete and ensure it is within acceptable limits (e.g., less than 3 seconds).
-
-3. **Test Case: Load Testing**
-   - **Step 1:** Simulate multiple users (e.g., 1000 users) trying to login/signup simultaneously.
-   - **Expected Result:** The system should handle the load without crashing, and response times should remain within acceptable limits.
-
-By following these steps, you can ensure that the login/signup page is thoroughly tested for functionality, edge cases, and performance.
+These steps ensure that the school management system is thoroughly tested for functionality, edge cases, and performance, ensuring a robust and reliable software solution.
