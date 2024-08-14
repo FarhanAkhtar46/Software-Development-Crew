@@ -1,1 +1,142 @@
-The system architecture for the login/signup page includes high-level design, component diagrams, sequence diagrams, and data flow diagrams. The design covers all necessary components such as the UI, API Gateway, Authentication Service, Database, Email Service, and Security Service. The diagrams illustrate the interactions and data flow within the system, ensuring scalability and security.
+### System Architecture Design for School Management System
+
+#### High-Level Design:
+The School Management System (SMS) is designed to manage and facilitate the administration of school operations. The system will have a web-based interface accessible by different user roles such as Admin, Teachers, Students, and Parents. The architecture will be based on a client-server model, which includes the following main components:
+
+1. **Client-Side (Frontend):**
+   - User Interfaces for different roles (Admin, Teacher, Student, Parent)
+   - Web Browser or Mobile App
+
+2. **Server-Side (Backend):**
+   - Web Server (e.g., Apache, Nginx)
+   - Application Server (e.g., Node.js, Django, Spring Boot)
+   - Database Server (e.g., MySQL, MongoDB)
+   - Authentication and Authorization Service (e.g., OAuth2, JWT)
+   - Notification Service (e.g., Email, SMS)
+
+3. **External Services:**
+   - Payment Gateway Integration
+   - Third-Party APIs (e.g., Google Maps for location services)
+
+#### Component Diagram:
+The component diagram represents the high-level structure of the School Management System and its interaction with various external components.
+
+```
++----------------------------------------------------+
+|                   School Management System         |
+|                                                    |
+| +--------------+  +--------------------------+     |
+| |  User Interface|  |  Web Server             |     |
+| | (Admin, Teacher|  | (Apache, Nginx)         |     |
+| |  Student, Parent) |                          |     |
+| +--------------+  +--------------------------+     |
+|                                                    |
+| +--------------+  +--------------------------+     |
+| |  Application  |  |  Database Server         |     |
+| |  Server       |  | (MySQL, MongoDB)         |     |
+| | (Node.js,     |  +--------------------------+     |
+| |  Django)      |                                 |
+| +--------------+  +--------------------------+     |
+|                                                    |
+| +--------------+  +--------------------------+     |
+| |  Auth Service |  |  Notification Service    |     |
+| | (OAuth2, JWT) |  | (Email, SMS)             |     |
+| +--------------+  +--------------------------+     |
+|                                                    |
+| +--------------+  +--------------------------+     |
+| |  Payment     |  |  Third-Party APIs        |     |
+| |  Gateway     |  | (Google Maps)            |     |
+| +--------------+  +--------------------------+     |
++----------------------------------------------------+
+```
+
+#### Sequence Diagrams:
+1. **User Login Sequence:**
+   ```
+   User --> Web Interface: Enter Credentials
+   Web Interface --> Auth Service: Validate Credentials
+   Auth Service --> Web Interface: Auth Token
+   Web Interface --> User: Dashboard
+   ```
+
+2. **Student Enrollment Sequence:**
+   ```
+   Admin --> Web Interface: Enter Student Details
+   Web Interface --> Application Server: Save Student Details
+   Application Server --> Database Server: Insert Student Record
+   Database Server --> Application Server: Acknowledge
+   Application Server --> Web Interface: Confirmation Message
+   Web Interface --> Admin: Student Enrolled
+   ```
+
+3. **Fee Payment Sequence:**
+   ```
+   Parent --> Web Interface: Initiate Payment
+   Web Interface --> Payment Gateway: Process Payment
+   Payment Gateway --> Application Server: Payment Confirmation
+   Application Server --> Database Server: Update Payment Record
+   Database Server --> Application Server: Acknowledge
+   Application Server --> Web Interface: Payment Successful
+   Web Interface --> Parent: Payment Receipt
+   ```
+
+#### Data Flow Diagrams:
+1. **Level 0 - Context Diagram:**
+   ```
+   +-------------------+
+   |     Admin         |
+   |                   |
+   +---------+---------+
+             |
+             |
+   +---------v---------+
+   |   School Management|
+   |      System       |
+   +---------+---------+
+             |
+             |
+   +---------v---------+
+   |     Database      |
+   |                   |
+   +-------------------+
+   ```
+
+2. **Level 1 - Detailed DFD:**
+   ```
+   +-------------------+
+   |     Admin         |
+   +---------+---------+
+             |
+             |
+   +---------v---------+
+   |  Student Enrollment|
+   |    (Process)      |
+   +---------+---------+
+             |
+             |
+   +---------v---------+
+   |   Database        |
+   +-------------------+
+
+   +-------------------+
+   |     Parent        |
+   +---------+---------+
+             |
+             |
+   +---------v---------+
+   |     Fee Payment   |
+   |    (Process)      |
+   +---------+---------+
+             |
+             |
+   +---------v---------+
+   |   Payment Gateway |
+   +-------------------+
+             |
+             |
+   +---------v---------+
+   |   Database        |
+   +-------------------+
+   ```
+
+This design ensures that the system is scalable, modular, and can handle the various requirements outlined in the SRS document.
