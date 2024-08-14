@@ -1,142 +1,113 @@
 ### System Architecture Design for School Management System
 
-#### High-Level Design:
-The School Management System (SMS) is designed to manage and facilitate the administration of school operations. The system will have a web-based interface accessible by different user roles such as Admin, Teachers, Students, and Parents. The architecture will be based on a client-server model, which includes the following main components:
+#### 1. High-Level Design
+The School Management System (SMS) will be a web-based application with the following key components:
+- **User Interface (UI) Layer**: Web and Mobile interfaces for administrators, teachers, students, and parents.
+- **Application Layer**: Core business logic, typically implemented as microservices.
+- **Data Access Layer**: Handles communication with the database.
+- **Database**: Centralized repository for all school-related data.
+- **External Services**: Integration with third-party services like email, SMS, and payment gateways.
 
-1. **Client-Side (Frontend):**
-   - User Interfaces for different roles (Admin, Teacher, Student, Parent)
-   - Web Browser or Mobile App
+#### 2. Component Diagrams
+The component diagram models the physical components of the system. Below are the main components:
 
-2. **Server-Side (Backend):**
-   - Web Server (e.g., Apache, Nginx)
-   - Application Server (e.g., Node.js, Django, Spring Boot)
-   - Database Server (e.g., MySQL, MongoDB)
-   - Authentication and Authorization Service (e.g., OAuth2, JWT)
-   - Notification Service (e.g., Email, SMS)
+- **User Interface Components**:
+  - Web Application
+  - Mobile Application
 
-3. **External Services:**
-   - Payment Gateway Integration
-   - Third-Party APIs (e.g., Google Maps for location services)
+- **Application Services**:
+  - Authentication Service
+  - Student Management Service
+  - Teacher Management Service
+  - Course Management Service
+  - Attendance Management Service
+  - Grades Management Service
+  - Notification Service
 
-#### Component Diagram:
-The component diagram represents the high-level structure of the School Management System and its interaction with various external components.
+- **Data Access Components**:
+  - ORM (Object-Relational Mapping) for database interaction
+
+- **Database**:
+  - SQL/NoSQL Database
+
+- **External Services**:
+  - Email Service
+  - SMS Gateway
+  - Payment Gateway
+
+#### Component Diagram
 
 ```
-+----------------------------------------------------+
-|                   School Management System         |
-|                                                    |
-| +--------------+  +--------------------------+     |
-| |  User Interface|  |  Web Server             |     |
-| | (Admin, Teacher|  | (Apache, Nginx)         |     |
-| |  Student, Parent) |                          |     |
-| +--------------+  +--------------------------+     |
-|                                                    |
-| +--------------+  +--------------------------+     |
-| |  Application  |  |  Database Server         |     |
-| |  Server       |  | (MySQL, MongoDB)         |     |
-| | (Node.js,     |  +--------------------------+     |
-| |  Django)      |                                 |
-| +--------------+  +--------------------------+     |
-|                                                    |
-| +--------------+  +--------------------------+     |
-| |  Auth Service |  |  Notification Service    |     |
-| | (OAuth2, JWT) |  | (Email, SMS)             |     |
-| +--------------+  +--------------------------+     |
-|                                                    |
-| +--------------+  +--------------------------+     |
-| |  Payment     |  |  Third-Party APIs        |     |
-| |  Gateway     |  | (Google Maps)            |     |
-| +--------------+  +--------------------------+     |
-+----------------------------------------------------+
+[User Interface]
+    |--- Web Application
+    |--- Mobile Application
+
+[Application Services]
+    |--- Authentication Service
+    |--- Student Management Service
+    |--- Teacher Management Service
+    |--- Course Management Service
+    |--- Attendance Management Service
+    |--- Grades Management Service
+    |--- Notification Service
+
+[Data Access Components]
+    |--- ORM
+
+[Database]
+    |--- SQL/NoSQL Database
+
+[External Services]
+    |--- Email Service
+    |--- SMS Gateway
+    |--- Payment Gateway
 ```
 
-#### Sequence Diagrams:
-1. **User Login Sequence:**
-   ```
-   User --> Web Interface: Enter Credentials
-   Web Interface --> Auth Service: Validate Credentials
-   Auth Service --> Web Interface: Auth Token
-   Web Interface --> User: Dashboard
-   ```
+#### 3. Sequence Diagrams
+Sequence diagrams show interactions between different components for specific use cases.
 
-2. **Student Enrollment Sequence:**
-   ```
-   Admin --> Web Interface: Enter Student Details
-   Web Interface --> Application Server: Save Student Details
-   Application Server --> Database Server: Insert Student Record
-   Database Server --> Application Server: Acknowledge
-   Application Server --> Web Interface: Confirmation Message
-   Web Interface --> Admin: Student Enrolled
-   ```
+**Example Use Case: Student Registration**
 
-3. **Fee Payment Sequence:**
-   ```
-   Parent --> Web Interface: Initiate Payment
-   Web Interface --> Payment Gateway: Process Payment
-   Payment Gateway --> Application Server: Payment Confirmation
-   Application Server --> Database Server: Update Payment Record
-   Database Server --> Application Server: Acknowledge
-   Application Server --> Web Interface: Payment Successful
-   Web Interface --> Parent: Payment Receipt
-   ```
+1. User (Admin) initiates registration via the Web Application.
+2. Web Application sends the registration request to the Student Management Service.
+3. Student Management Service validates the request.
+4. If valid, Student Management Service sends data to the ORM.
+5. ORM interacts with the database to store student information.
+6. Database confirms the transaction.
+7. ORM sends confirmation back to the Student Management Service.
+8. Student Management Service sends confirmation back to the Web Application.
+9. Web Application displays confirmation to the Admin.
 
-#### Data Flow Diagrams:
-1. **Level 0 - Context Diagram:**
-   ```
-   +-------------------+
-   |     Admin         |
-   |                   |
-   +---------+---------+
-             |
-             |
-   +---------v---------+
-   |   School Management|
-   |      System       |
-   +---------+---------+
-             |
-             |
-   +---------v---------+
-   |     Database      |
-   |                   |
-   +-------------------+
-   ```
+#### Sequence Diagram: Student Registration
 
-2. **Level 1 - Detailed DFD:**
-   ```
-   +-------------------+
-   |     Admin         |
-   +---------+---------+
-             |
-             |
-   +---------v---------+
-   |  Student Enrollment|
-   |    (Process)      |
-   +---------+---------+
-             |
-             |
-   +---------v---------+
-   |   Database        |
-   +-------------------+
+```
+Admin -> Web Application: Initiate Registration
+Web Application -> Student Management Service: Send Registration Data
+Student Management Service -> ORM: Validate and Store Data
+ORM -> Database: Store Data
+Database -> ORM: Data Stored Confirmation
+ORM -> Student Management Service: Confirmation Received
+Student Management Service -> Web Application: Registration Successful
+Web Application -> Admin: Display Confirmation
+```
 
-   +-------------------+
-   |     Parent        |
-   +---------+---------+
-             |
-             |
-   +---------v---------+
-   |     Fee Payment   |
-   |    (Process)      |
-   +---------+---------+
-             |
-             |
-   +---------v---------+
-   |   Payment Gateway |
-   +-------------------+
-             |
-             |
-   +---------v---------+
-   |   Database        |
-   +-------------------+
-   ```
+#### 4. Data Flow Diagrams (DFD)
+Data Flow Diagrams represent the flow of information within the system.
 
-This design ensures that the system is scalable, modular, and can handle the various requirements outlined in the SRS document.
+**Level 0 (Context Diagram)**
+
+```
+[User] --(Request/Response)--> [School Management System] --(Data Storage/Access)--> [Database]
+```
+
+**Level 1 (High-Level DFD)**
+
+```
+[Admin] --(Manage Students)--> [Student Management Service] --(Store/Retrieve)--> [Database]
+[Teacher] --(Manage Courses)--> [Course Management Service] --(Store/Retrieve)--> [Database]
+[Student] --(View Grades)--> [Grades Management Service] --(Store/Retrieve)--> [Database]
+[Parent] --(Receive Notifications)--> [Notification Service] --(Send)--> [Email/SMS Gateway]
+```
+
+### Conclusion
+The designed system architecture and flow diagrams ensure a scalable and modular School Management System. Each component is designed to handle specific responsibilities, promoting maintainability and extensibility. The use of microservices ensures that the system can scale as needed to accommodate growing user bases and additional features.
